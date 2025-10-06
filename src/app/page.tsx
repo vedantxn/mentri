@@ -1,10 +1,20 @@
-import { Button } from "@/components/ui/button";
+import { HomeView } from "@/modules/home/ui/views/home-view"
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+const page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  if (!session) {
+    redirect("/sign-in");
+  }
+
   return (
-    <div>
-      <h1>Home</h1>
-      <Button className="hover:bg-blue-500">Click me</Button>
-    </div>
+    <HomeView />
   );
-}
+};
+
+export default page;
