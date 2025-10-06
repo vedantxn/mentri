@@ -16,7 +16,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(1, { message: "Password is required" }),
 })
 
@@ -33,24 +33,45 @@ export const SignInView = () => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
     setPending(true);
     
-    await authClient.signIn.email(
+    authClient.signIn.email(
       {
         email: data.email,
         password: data.password,
       },
       {
         onSuccess: () => {
+          setPending(false);
           router.push("/");
         },
         onError: (error) => {
+          setPending(false);
           setError(error.error.message);
         },
-        onFinish: () => {
+      }
+    );
+  };
+
+  const onSocial = (provider: "google" | "github") => {
+    setError(null);
+    setPending(true);
+    
+    authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+      {
+        onError: (error) => {
           setPending(false);
+          setError(error.error.message);
+        },
+        onSuccess: () => {
+          setPending(false);
+          router.push("/");
         },
       }
     );
@@ -123,6 +144,8 @@ export const SignInView = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <Button
+                    disabled={pending}
+                    onClick={() => onSocial("google")}
                     variant="outline"
                     className="w-full"
                     type="button"
@@ -130,6 +153,8 @@ export const SignInView = () => {
                     Google
                   </Button>
                   <Button
+                    disabled={pending}
+                    onClick={() => onSocial("github")}
                     variant="outline"
                     className="w-full"
                     type="button"

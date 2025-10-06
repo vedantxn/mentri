@@ -3,7 +3,6 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -14,10 +13,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { OctagonAlertIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email(),
+  email: z.email(),
   password: z.string().min(1, { message: "Password is required" }),
   confirmPassword: z.string().min(1, { message: "Confirm Password is required" }),
 })
@@ -29,6 +29,7 @@ const formSchema = z.object({
   });
 
 export const SignUpView = () => {
+  
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -43,11 +44,11 @@ export const SignUpView = () => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
     setPending(true);
     
-    await authClient.signUp.email(
+    authClient.signUp.email(
       {
         name: data.name,
         email: data.email,
@@ -55,13 +56,34 @@ export const SignUpView = () => {
       },
       {
         onSuccess: () => {
+          setPending(false);
           router.push("/");
         },
         onError: (error) => {
+          setPending(false);
           setError(error.error.message);
         },
-        onFinish: () => {
+      }
+    );
+  };
+
+  const onSocial = (provider: "google" | "github") => {
+    setError(null);
+    setPending(true);
+    
+    authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
           setPending(false);
+          router.push("/");
+        },
+        onError: (error) => {
+          setPending(false);
+          setError(error.error.message);
         },
       }
     );
@@ -166,6 +188,8 @@ export const SignUpView = () => {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <Button
+                    disabled={pending}
+                    onClick={() => onSocial("google")}
                     variant="outline"
                     className="w-full"
                     type="button"
@@ -173,6 +197,8 @@ export const SignUpView = () => {
                     Google
                   </Button>
                   <Button
+                    disabled={pending}
+                    onClick={() => onSocial("github")}
                     variant="outline"
                     className="w-full"
                     type="button"
