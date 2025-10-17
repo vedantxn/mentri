@@ -102,7 +102,7 @@ export const SignInView = () => {
         <div className="flex items-center gap-2">
           {/* Email */}
           <a
-            href="mailto:contact@mentri.ai"
+            href="mailto:vedantxn@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-lg"
@@ -113,7 +113,7 @@ export const SignInView = () => {
 
           {/* X/Twitter */}
           <a
-            href="https://twitter.com/yourusername"
+            href="https://twitter.com/vedantxn"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-lg"
@@ -124,7 +124,7 @@ export const SignInView = () => {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com/company/yourcompany"
+            href="https://linkedin.com/in/vedantxn"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-lg"
@@ -135,7 +135,7 @@ export const SignInView = () => {
 
           {/* YouTube */}
           <a
-            href="https://youtube.com/@yourchannel"
+            href="https://youtube.com/@vedantxn"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-white/30 hover:bg-white/10 hover:shadow-lg"
@@ -146,7 +146,7 @@ export const SignInView = () => {
 
           {/* Featured GitHub Button */}
           <a
-            href="https://github.com/yourrepo"
+            href="https://github.com/vedantxn/mentri"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center gap-2 overflow-hidden rounded-full border border-white/20 bg-gradient-to-r from-white/10 to-white/5 px-4 py-1.5 backdrop-blur-md transition-all duration-300 hover:border-white/40 hover:from-white/20 hover:to-white/10 hover:shadow-xl"
