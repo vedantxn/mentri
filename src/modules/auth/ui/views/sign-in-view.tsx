@@ -95,7 +95,7 @@ export const SignInView = () => {
       <div className="relative z-10 flex items-center justify-between px-6 py-5">
         <div className="flex items-center gap-2">
           <img src="/logo-white.svg" alt="logo" className="h-8 w-8 fill-white hover:rotate-180 transition-all duration-200" />
-          <span className="text-lg font-semibold text-white hover:text-white">Mentri.ai</span>
+          <span className="text-lg font-semibold text-white hover:text-white">mentri.ai</span>
         </div>
         
         {/* Social Links - Top Right */}
