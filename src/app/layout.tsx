@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "sonner";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <NuqsAdapter>
     <TRPCReactProvider>
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
     <Toaster />
     </TRPCReactProvider>
+    </NuqsAdapter>
   );
 }
