@@ -4,6 +4,13 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a responsive table wrapper and a table element with data-slot attributes and merged class names.
+ *
+ * @param className - Additional class names applied to the table element
+ * @param props - Remaining props forwarded to the underlying `table` element
+ * @returns The table element wrapped in a horizontally scrollable container
+ */
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
@@ -19,6 +26,12 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   )
 }
 
+/**
+ * Renders a table header element with a data-slot for styling hooks and default row-bottom borders.
+ *
+ * @param className - Additional class names to merge with the default header styling
+ * @returns The `thead` element with `data-slot="table-header"` and the composed `className`
+ */
 function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   return (
     <thead
@@ -29,6 +42,11 @@ function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
   )
 }
 
+/**
+ * Renders a tbody element used for table body content with styling hooks.
+ *
+ * @returns A `tbody` element with a data-slot of "table-body", classes that remove the bottom border from the last row, and any provided `className`.
+ */
 function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
@@ -39,6 +57,14 @@ function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   )
 }
 
+/**
+ * Renders the table footer element used by the table components, with default footer styling and a styling hook.
+ *
+ * The element receives a data-slot of "table-footer", merges any provided `className` with the component's default footer classes, and spreads remaining props onto the underlying `tfoot`.
+ *
+ * @param className - Additional class names merged with the component's default footer classes
+ * @returns A `tfoot` element with composed classes, `data-slot="table-footer"`, and forwarded props
+ */
 function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   return (
     <tfoot
@@ -52,6 +78,11 @@ function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   )
 }
 
+/**
+ * Renders a table row element with standardized styling and a data-slot attribute for styling hooks.
+ *
+ * @returns A `<tr>` element with the component's design-system classes applied and all received props forwarded.
+ */
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
@@ -65,6 +96,11 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   )
 }
 
+/**
+ * Renders a table header cell configured for the design system with the `data-slot="table-head"` attribute and default header styles.
+ *
+ * @returns A `th` element with `data-slot="table-head"`, a composed header `className`, and all provided props forwarded to the element.
+ */
 function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
@@ -78,6 +114,11 @@ function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   )
 }
 
+/**
+ * Renders a table cell element with consistent spacing and checkbox-aware styles.
+ *
+ * @returns A `td` element with default cell styling (padding, vertical alignment, no-wrap) that adjusts layout when it contains a checkbox and forwards all received props.
+ */
 function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   return (
     <td
@@ -91,6 +132,11 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   )
 }
 
+/**
+ * Renders a table caption element with the component's standard caption styling and slot attribute.
+ *
+ * @returns A `caption` element with preset caption classes, a `data-slot="table-caption"` attribute, and any provided props applied.
+ */
 function TableCaption({
   className,
   ...props

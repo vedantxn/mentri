@@ -2,6 +2,12 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * A styled textarea element that applies a standard set of UI classes and exposes a `data-slot="textarea"`.
+ *
+ * @param className - Additional CSS class names to merge with the component's default styling
+ * @returns A textarea element with the composed `className` and all provided props forwarded
+ */
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (
     <textarea
