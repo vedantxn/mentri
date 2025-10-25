@@ -1,9 +1,9 @@
 "use client";
 
-import { ErrorState } from "@/components/error-state";
+import { EmptyState } from "@/components/empty-state";
 
 export const ErrorPage = () => {
     return (
-        <ErrorState title="Error" description="Something went wrong" />
+        <EmptyState title="Error" description="Something went wrong" />
     )
 }
