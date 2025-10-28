@@ -5,6 +5,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { EmptyState } from "@/components/empty-state";
 import { LoadingState } from "@/components/loading-state";
+import { DataTable } from "@/components/data-table-global";
 
 export const MeetingsView = () => {
 
@@ -13,7 +14,10 @@ export const MeetingsView = () => {
 
     return (
         <div>
-            {JSON.stringify(data)}
+            <DataTable
+                columns={columns}
+                data={data.items}
+            />
         </div>
     );
 };
