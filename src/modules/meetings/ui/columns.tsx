@@ -11,9 +11,9 @@ import {
     CircleXIcon, 
     CircleCheckIcon, 
     ClockArrowUpIcon, 
-    ClockFadingIcon, 
     LoaderIcon, 
-    CornerDownRightIcon
+    CornerDownRightIcon,
+    ClockFadingIcon
 } from "lucide-react";
 
 function formatDuration(duration: number) {
@@ -34,10 +34,10 @@ const statusIconMap: {
 
 const statusColorMap = {
     upcoming: "bg-yellow-500/20 text-yellow-800",
-    active: "",
-    completed: "",
-    processing: "",
-    cancelled: "",
+    active: "bg-blue-500/20 text-blue-800",
+    completed: "bg-green-500/20 text-green-800",
+    processing: "bg-orange-500/20 text-orange-800",
+    cancelled: "bg-red-500/20 text-red-800",
 }
 
 export const columns: ColumnDef<MeetingGetMany[number]>[] = [
@@ -68,7 +68,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
     cell: ({ row }) => {
       const Icon = statusIconMap[row.original.status];
       return (
-        <Badge>
+        <Badge variant="outline">
           <Icon className={cn(statusColorMap[row.original.status], "size-4")}/>
           <span>{row.original.status}</span>
         </Badge>
@@ -79,7 +79,10 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
     accessorKey: "duration",
     header: "Duration",
     cell: ({ row }) => (
-      <span>{formatDuration(row.original.duration)}</span>
+      <Badge variant="outline">
+        <ClockFadingIcon className="size-4"/>
+        {formatDuration(row.original.duration)}
+      </Badge>
     )
   },
 ];

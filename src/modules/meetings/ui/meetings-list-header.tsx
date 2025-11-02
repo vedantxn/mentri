@@ -1,12 +1,29 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useMeetingsFilters } from "../hooks/use-meetings-filters";
 
-import { Button } from "@/components/ui/button"
-import { PlusIcon } from "lucide-react"
-import { NewMeetingDialog } from "./new-meeting-dialog"
+import { Button } from "@/components/ui/button";
+import { PlusIcon, XCircleIcon } from "lucide-react";
+import { NewMeetingDialog } from "./new-meeting-dialog";
+import { MeetingsSearchFilter } from "./meetings-search-filter";
+import { StatusFilter } from "./status-filter";
+import { AgentIdFilter } from "./agent-id-filter";
+import { ScrollArea, Scrollbar } from "@radix-ui/react-scroll-area";
 
 export const MeetingsListHeader = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    
+    const [filters, setFilters] = useMeetingsFilters();
+
+    const isAnyFilterModified = !!filters.status || !!filters.search || !!filters.agentId;
+   
+    const onClearFilters = () => {
+        setFilters({
+            status: null,
+            search: "",
+            agentId: "",
+            page: 1,
+        });
+    };
+
     return (
         <>
         <NewMeetingDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
@@ -19,6 +36,20 @@ export const MeetingsListHeader = () => {
                     New Meeting
                 </Button>
             </div>
+            <ScrollArea>
+                <div>
+                    <MeetingsSearchFilter />
+                    <StatusFilter />
+                    <AgentIdFilter />
+                    {isAnyFilterModified && (
+                        <Button onClick={onClearFilters} variant="outline" size="icon">
+                            <XCircleIcon />
+                            Clear
+                        </Button>
+                    )}
+                </div>
+                <Scrollbar orientation="horizontal"/>
+            </ScrollArea>            
         </div>
         </>
     );

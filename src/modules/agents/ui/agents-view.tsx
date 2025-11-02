@@ -5,7 +5,7 @@ import { useTRPC } from "@/trpc/client";
 import { useAgentsFilters } from "../hooks/use-agents-filters";
 import { useRouter } from "next/navigation";
 
-import { DataTable } from "./data-table";
+import { DataTable } from "@/components/data-table-global";
 import { columns } from "./columns";
 import { EmptyState } from "@/components/empty-state";
 import { DataPagination } from "./agents-data-pagination";

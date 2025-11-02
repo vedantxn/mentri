@@ -40,6 +40,11 @@ export const CommandSelect = ({
     // const [search, setSearch] = useState("");
     const selectedOptions = options.find((option) => option.value === value);
 
+    const handleOpenChange = (value: boolean) => {
+        onSearch?.("");
+        setOpen(value);
+    };
+
     return (
         <>
             <Button
@@ -52,7 +57,7 @@ export const CommandSelect = ({
                 {selectedOptions?.children ?? placeholder}
                 <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={open} onOpenChange={handleOpenChange}>
                 <CommandInput
                     placeholder="Search..."
                     // value={value}
