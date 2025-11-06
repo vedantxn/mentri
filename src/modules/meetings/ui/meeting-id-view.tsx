@@ -9,6 +9,11 @@ import { useState } from "react";
 
 import { MeetingIdViewHeader } from "./meeting-id-view-header";
 import { UpdateMeetingDialog } from "./update-meeting-dialog";
+import { UpcomingState } from "./states/upcoming-state";
+import { ActiveState } from "./states/active-state";
+import { CancelState } from "./states/cancel-state";
+import { ProcessingState } from "./states/processing-state";
+import { CompletedState } from "./states/completed-state";
 
 interface Props {
     meetingId: string;
@@ -47,7 +52,13 @@ export const MeetingIdView = ({ meetingId }: Props) => {
         const ok = await RemoveConfirmationModalOpen();
         if (!ok) return;
         removeMeeting.mutate({ id: meetingId });
-    }
+    };
+
+    const isActive = data.status === 'active';
+    const isUpcoming = data.status === 'upcoming';
+    const isCancelled = data.status === 'cancelled';
+    const isCompleted = data.status === 'completed';
+    const isProcessing = data.status === 'processing';
 
     return (
         <>
@@ -66,7 +77,18 @@ export const MeetingIdView = ({ meetingId }: Props) => {
                     onRemove={handleRemoveMeeting}
                     onEdit={() => setUpdateMeetingDialogOpen(true)}
                 />
-                {JSON.stringify(data, null, 2)}
+                {isCancelled && <CancelState />}
+                {isCompleted && <CompletedState />}
+                {isProcessing && <ProcessingState />}
+                {isUpcoming && <UpcomingState 
+                    meetingId={meetingId} 
+                    onCancelMeeting={() => {}} 
+                    isCacelling={false} 
+                />}
+                {isActive && <ActiveState 
+                    meetingId={meetingId} 
+                />}
+                {/* {JSON.stringify(data, null, 2)} */}
             </div>
         </>
     );
