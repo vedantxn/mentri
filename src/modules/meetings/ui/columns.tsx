@@ -15,12 +15,13 @@ import {
     CornerDownRightIcon,
     ClockFadingIcon
 } from "lucide-react";
+import { formatDuration } from "@/lib/utils";
 
-function formatDuration(duration: number) {
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
-    return `${hours}h ${minutes}m`;
-};
+// function formatDuration(duration: number) {
+//     const hours = Math.floor(duration / 60);
+//     const minutes = duration % 60;
+//     return `${hours}h ${minutes}m`;
+// };
 
 const statusIconMap: {
     [key: string]: React.ComponentType<{ className?: string }>;
