@@ -1,15 +1,16 @@
 import { MeetingGetOne } from "../../types";
 import Link from "next/link";
-import MarkDown from "react-markdown";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { formatDuration } from "@/lib/utils";
 import { format } from "date-fns";
+import Markdown from "react-markdown";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpenTextIcon, ClockFadingIcon, FileTextIcon, FileVideoIcon, SparklesIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import Markdown from "react-markdown";
+import { Transcript } from "../transcript";
+import { ChatProvider } from "../chat-provider";
 
 interface Props { 
     data: MeetingGetOne;
@@ -42,6 +43,12 @@ export const CompletedState = ({ data }: Props) => {
                         <ScrollBar />
                     </ScrollArea>
                 </div>
+                <TabsContent value="transcript">
+                    <Transcript meetingId={data.id} />
+                </TabsContent>
+                <TabsContent value="chat">
+                    <ChatProvider meetingId={data.id} meetingName={data.name} />
+                </TabsContent>
                 <TabsContent value="recording">
                     <div>
                         <video
