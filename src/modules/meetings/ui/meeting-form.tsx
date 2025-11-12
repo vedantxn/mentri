@@ -72,13 +72,9 @@ export const MeetingForm = ({ onSuccess, onCancel, initialValues }: MeetingFormP
         await queryClient.invalidateQueries(
           trpc.meetings.getMany.queryOptions({})
         );
-
-        //TODO: Invalidate free tier usage
-        // if (initialValues?.id) {
-        //   await queryClient.invalidateQueries(
-        //     trpc.agents.getOne.queryOptions({ id: initialValues.id })
-        //   );
-        // }
+        await queryClient.invalidateQueries(
+          trpc.premium.getFreeUsage.queryOptions()
+        );
 
         onSuccess?.();
       },

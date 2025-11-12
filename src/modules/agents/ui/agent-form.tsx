@@ -32,7 +32,7 @@ interface AgentFormProps {
 export const AgentForm = ({ onSuccess, onCancel, initialValues }: AgentFormProps) => {
 
   const trpc = useTRPC();
-  //const router = useRouter();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const firstInputRef = useRef<HTMLInputElement>(null);
 
@@ -49,7 +49,11 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: AgentFormProps
       },
       onError: (error) => {
         toast.error(`Error creating agent: ${error.message}`);
-        // TODO: Check if error code is 'CONFLICT' and show a specific message
+        
+        if (error.data?.code === 'FORBIDDEN') {
+          toast.error('You have reached the maximum number of agents');
+          router.push('/pricing');
+        }
       },
     })
   );
@@ -60,19 +64,19 @@ export const AgentForm = ({ onSuccess, onCancel, initialValues }: AgentFormProps
         await queryClient.invalidateQueries(
           trpc.agents.getMany.queryOptions({})
         );
-
-        //TODO: Invalidate free tier usage
-        // if (initialValues?.id) {
-        //   await queryClient.invalidateQueries(
-        //     trpc.agents.getOne.queryOptions({ id: initialValues.id })
-        //   );
-        // }
+        await queryClient.invalidateQueries(
+          trpc.premium.getFreeUsage.queryOptions()
+        );
 
         onSuccess?.();
       },
       onError: (error) => {
         toast.error(`Error updating agent: ${error.message}`);
-        // TODO: Check if error code is 'CONFLICT' and show a specific message
+        
+        if (error.data?.code === 'FORBIDDEN') {
+          toast.error('You have reached the maximum number of agents');
+          router.push('/pricing');
+        }
       },
     })
   );
