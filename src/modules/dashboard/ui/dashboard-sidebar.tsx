@@ -7,6 +7,7 @@ import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DashboardUserButton } from "./dashboard-user-button";
 import { useSidebarContext } from "@/lib/sidebar-context";
+import { DashboardTrial } from "./dashboard-trial";
 
 const firstSection = [
   {
@@ -121,6 +122,7 @@ export const DashboardSidebar = () => {
 
       {/* Footer */}
       <div className="h-16 p-3 border-t border-slate-200 dark:border-slate-800 flex items-center">
+        <DashboardTrial />
         <DashboardUserButton />
       </div>
     </aside>
