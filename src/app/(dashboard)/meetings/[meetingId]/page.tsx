@@ -31,7 +31,6 @@ const Page = async ({ params }: Props) => {
     void queryClient.prefetchQuery(
         trpc.meetings.getOne.queryOptions({ id: meetingId }),
     );
-    //TODO: prefetch 'meetings.getTranscript' query
     
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
